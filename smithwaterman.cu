@@ -85,7 +85,6 @@ int main(int argc, char* argv[]) {
     for(int i = 0; i<m+1; i++){
         StrB[i] = b[i];
     }
-    std::cout << std::endl;
     for(int i = 0; i<n+1; i++){
         StrA[i] = a[i];
     }
@@ -96,18 +95,12 @@ int main(int argc, char* argv[]) {
     thrust::device_vector<char> d_StrA = StrA;
     int maxScore = 0;
     int temp;
-    std::cout << std::endl;
-    for(int val = 0; val<m+1; val++){
-        std::cout << val1[val] << " ";
-    }
     for(int i = 1; i < n+1; i++){
 
         thrust::transform(thrust::make_zip_iterator(thrust::make_tuple(StrB.begin()+1, val1.begin(), val1.begin()+1)),
                           thrust::make_zip_iterator(thrust::make_tuple(StrB.end(), val1.end()-1, val1.end())),
                           val2.begin()+1,
                           match(StrA[i]));
-
-        std::cout << std::endl;
 
         thrust::inclusive_scan(
             val2.begin(),
@@ -125,6 +118,6 @@ int main(int argc, char* argv[]) {
         //     std::cout << val1[val] << " ";
         // }
     }
-    std::cout << std::endl << maxScore << std::endl;
+    std::cout << maxScore << std::endl;
 }
 
